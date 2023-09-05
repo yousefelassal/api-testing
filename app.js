@@ -4,6 +4,9 @@ const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // employees data in a database
 const employees = [
     { firstName: 'Jane', lastName: 'Smith', age: 20 },
@@ -86,6 +89,7 @@ app.get('/', (req, res) => {
     const id = uuidv4();
     const message = {
       id,
+      text: req.body.text,
     };
   
     messages[id] = message;
