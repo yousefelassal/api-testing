@@ -9,3 +9,29 @@
 - 500 Internal server error - This is a generic server error. It probably shouldn't be thrown explicitly.
 - 502 Bad Gateway - This indicates an invalid response from an upstream server.
 - 503 Service Unavailable - This indicates that something unexpected happened on server side (It can be anything like server overload, some parts of the system failed, etc.).
+
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// existing users
+const users = [
+  { email: 'abc@foo.com' }
+]
+
+app.use(bodyParser.json());
+
+app.post('/users', (req, res) => {
+  const { email } = req.body;
+  const userExists = users.find(u => u.email === email);
+  if (userExists) {
+    return res.status(400).json({ error: 'User already exists' })
+  }
+  res.json(req.body);
+});
+
+
+app.listen(3000, () => console.log('server started'));
+```
