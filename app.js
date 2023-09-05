@@ -97,6 +97,17 @@ app.get('/', (req, res) => {
     return res.send(message);
   });
 
+  app.delete('/messages/:messageId', (req, res) => {
+    const {
+      [req.params.messageId]: message,
+      ...otherMessages
+    } = messages;
+  
+    messages = otherMessages;
+  
+    return res.send(message);
+  });
+
 app.get('/employees', (req, res) => {
     const { firstName, lastName, age } = req.query;
     let results = [...employees];
