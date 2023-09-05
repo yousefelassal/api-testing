@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
@@ -79,6 +80,17 @@ app.get('/', (req, res) => {
   
   app.get('/messages/:messageId', (req, res) => {
     return res.send(messages[req.params.messageId]);
+  });
+
+  app.post('/messages', (req, res) => {
+    const id = uuidv4();
+    const message = {
+      id,
+    };
+  
+    messages[id] = message;
+  
+    return res.send(message);
   });
 
 app.get('/employees', (req, res) => {
