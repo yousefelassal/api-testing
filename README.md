@@ -103,3 +103,25 @@ For instance, we may want to extract the query string from a URL like:
 http://example.com/articles?sort=+author,-datepublished
 
 Where + means ascending and - means descending. So we sort by author’s name in alphabetical order and datepublished from most recent to least recent.
+
+## cURL
+
+specify the HTTP method with the -X flag (or --request flag)
+```
+curl http://localhost:3000
+-> Received a GET HTTP method
+
+curl -X POST http://localhost:3000
+-> Received a POST HTTP method
+
+curl -X PUT http://localhost:3000
+-> Received a PUT HTTP method
+
+curl -X DELETE http://localhost:3000
+-> Received a DELETE HTTP method
+```
+
+Specify HTTP headers with the -H flag -- that's how we are saying we want to transfer JSON -- and data as payload with the -d flag
+```
+curl -X POST -H "Content-Type:application/json" http://localhost:3000/messages -d '{"text":"Hi again, its me"}'
+```
